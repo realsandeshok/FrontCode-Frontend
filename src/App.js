@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./css/App.css";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import CodeEditor from "./screens/CodeEditor";
+import Navbar from "./components/Navbar";
+import Home from "./screens/Home";
+import YourWork from "./screens/YourWork";
+import CodeSnippetState from "./context/CodeSnippetState";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <div className="flex flex-col"> */}
+      <CodeSnippetState>
+        <BrowserRouter>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/codeeditor" element={<CodeEditor />} />
+            <Route path="/yourwork" element={<YourWork />} />
+          </Routes>
+        </BrowserRouter>
+      </CodeSnippetState>
+      {/* </div> */}
+    </>
   );
 }
 
