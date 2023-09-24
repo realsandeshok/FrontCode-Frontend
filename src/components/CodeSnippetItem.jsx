@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import codeContext from "../context/codeContext";
+import FullEditor from "./FullEditor";
 
 const CodeSnippetItem = (props) => {
   const context = useContext(codeContext);
@@ -30,9 +31,7 @@ const CodeSnippetItem = (props) => {
                 />
               </div>
               <div className="px-2 cursor-pointer">
-                <Link to={""}>
-                  <EditIcon />
-                </Link>
+                <EditIcon />
               </div>
             </div>
           </div>

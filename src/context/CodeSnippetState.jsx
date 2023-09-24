@@ -24,7 +24,7 @@ const CodeSnippetState = (props) => {
   };
 
   // Add
-  const addCodesnippet = async (title) => {
+  const addCodesnippet = async (title, html, css, javascript) => {
     // TODO API call
     // eslint-disable-next-line
     const response = await fetch(`${host}/api/codesnippet/addcodesnippet`, {
@@ -34,7 +34,7 @@ const CodeSnippetState = (props) => {
         "authentication-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
       },
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ title, html, css, javascript }),
     });
 
     const codesnippet = await response.json();
@@ -63,7 +63,7 @@ const CodeSnippetState = (props) => {
   };
 
   // Edit
-  const editCodesnippet = async (id, title) => {
+  const editCodesnippet = async (id, title, html, css, javascript) => {
     // API Call
     const response = await fetch(
       `${host}/api/codesnippet/updatecodesnippet/${id}`,
@@ -74,7 +74,7 @@ const CodeSnippetState = (props) => {
           "authentication-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
         },
-        body: JSON.stringify({ id, title }),
+        body: JSON.stringify({ id, title, html, css, javascript }),
       }
     );
     // eslint-disable-next-line
@@ -85,6 +85,9 @@ const CodeSnippetState = (props) => {
       const element = codesnippets[index];
       if (element._id === id) {
         element.title = title;
+        element.html = html;
+        element.css = css;
+        element.javascript = javascript;
       }
     }
   };

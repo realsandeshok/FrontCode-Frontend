@@ -1,27 +1,33 @@
 import React from "react";
 import "./css/App.css";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import CodeEditor from "./screens/CodeEditor";
-import Navbar from "./components/Navbar";
-import Home from "./screens/Home";
-import YourWork from "./screens/YourWork";
+import { Routes, BrowserRouter, Route } from "react-router-dom";
+// import CodeEditor from "./screens/CodeEditor";
+// import Navbar from "./components/Navbar";
+// import Home from "./screens/Home";
+// import YourWork from "./screens/YourWork";
 import CodeSnippetState from "./context/CodeSnippetState";
+// import FullEditor from "./components/FullEditor";
+// import Navbar from "./components/Navbar";
+import LandingPage from "./screens/LandingPage";
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
 
 function App() {
   return (
     <>
-      {/* <div className="flex flex-col"> */}
       <CodeSnippetState>
         <BrowserRouter>
-          <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/codeeditor" element={<CodeEditor />} />
-            <Route path="/yourwork" element={<YourWork />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/signup" element={<SignupForm />} />
+            <Route path="/login" element={<LoginForm />} />
+            {/* <Route path="/" element={<Home />} /> */}
+            {/* <Route path="/codeeditor" element={<CodeEditor />} /> */}
+            {/* <Route path="/editor" element={<FullEditor />} /> */}
+            {/* <Route path="/yourwork" element={<YourWork />} /> */}
           </Routes>
         </BrowserRouter>
       </CodeSnippetState>
-      {/* </div> */}
     </>
   );
 }

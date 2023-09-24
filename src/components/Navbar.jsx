@@ -1,50 +1,58 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { AppBar, Toolbar } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import React from "react";
+import { AppBar, Button, Stack, Toolbar } from "@mui/material";
 import CodeOffIcon from "@mui/icons-material/CodeOff";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  let [open, setOpen] = useState(false);
   return (
     <>
       <AppBar className="relative">
         <Toolbar className="bg-black ">
           <div className="shadow-md w-full top-0 left-0 ">
-            <div className="md:flex items-center justify-between py-2 md:px-7 px-7 ">
+            <div className=" flex items-center justify-between py-[1vw]  px-7 ">
               <div
                 className="text-white hover:text-gray-400 duration-500 
-            text-2xl cursor-pointer flex items-center "
+            text-2xl cursor-pointer flex items-center text-[2vw]"
               >
-                <span className="text-3xl pr-1">
+                <span className=" pr-[2vw]">
                   <CodeOffIcon fontSize="large" />
                 </span>
-                FrontCode
+                FrontCode - Empowering Frontend Developers and Beginners
               </div>
-              <div
-                onClick={() => setOpen(!open)}
-                className=" absolute right-[2rem] top-[1rem] cursor pointer md:hidden"
+              <Stack
+                direction="row"
+                spacing={3}
+                style={{
+                  width: "21%",
+                }}
               >
-                <MenuIcon name={open ? "close" : "menu"}></MenuIcon>
-              </div>
-              <ul
-                className={`bg-black md:flex md:items-center md:pb-0 
-             absolute md:static md:z-auto z-[0] 
-            left-0 w-full md:w-auto md:pl-0 pl-10 
-            transition-all duration-500 ease-in ${
-              open ? " opacity-100" : "top-[-490px]"
-            }`}
-              >
-                <li className="md:ml-8 text-xl md:my-0 my-7 text-white hover:text-gray-400 duration-500">
-                  <Link to={"/"}>Home</Link>
-                </li>
-                <li className="md:ml-8 text-xl md:my-0 my-7  text-white hover:text-gray-400 duration-500">
-                  <Link to={"/codeeditor"}>CodeEditor</Link>
-                </li>
-                <li className="md:ml-8 text-xl md:my-0 my-7  text-white hover:text-gray-400 duration-500">
-                  <Link to={"/yourwork"}>YourWork</Link>
-                </li>
-              </ul>
+                <Link to={"/login"} style={{ width: "100%" }}>
+                  <Button
+                    style={{
+                      backgroundColor: "#333333",
+                      fontWeight: "normal",
+                      fontSize: "15px",
+                    }}
+                    variant="contained"
+                    fullWidth
+                  >
+                    LOGIN
+                  </Button>
+                </Link>
+                <Link to={"/signup"} style={{ width: "100%" }}>
+                  <Button
+                    style={{
+                      backgroundColor: "#333333",
+                      fontWeight: "normal",
+                      fontSize: "15px",
+                    }}
+                    variant="contained"
+                    fullWidth
+                  >
+                    SIGN UP
+                  </Button>
+                </Link>
+              </Stack>
             </div>
           </div>
         </Toolbar>
