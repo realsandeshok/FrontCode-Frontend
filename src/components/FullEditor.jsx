@@ -10,24 +10,27 @@ import Workspace from "./WorkSpace";
 import Result from "./Result";
 import DataProvider from "../context/DataProvider";
 import Editor from "./Editor";
+import CodeContext from "../context/codeContext";
 
 const FullEditor = () => {
-  const context = useContext(codeContext);
+  const context = useContext(CodeContext);
   // eslint-disable-next-line
-  const { addCodesnippet } = context;
+  const { addCodesnippet ,setTitle,title, html,setHtml, css,setCss, javascript,setJavascript} = context;
 
   const [isTitle, setIsTitle] = useState("");
-  const [title, setTitle] = useState("Untitled");
+  // const [title, setTitle] = useState("Untitled");
 
   const handleClick = () => {
     addCodesnippet(title, html, css, javascript);
+    console.log(title)      
+    console.log(html)      
     // setTitle("")
   };
 
   // Editor
-  const [html, setHtml] = useState("");
-  const [css, setCss] = useState("");
-  const [javascript, setJavascript] = useState("");
+  // const [html, setHtml] = useState("");
+  // const [css, setCss] = useState("");
+  // const [javascript, setJavascript] = useState("");
   const [src, setSrc] = useState("");
   const srcCode = `
     <html>
@@ -46,7 +49,7 @@ const FullEditor = () => {
       return () => clearTimeout(timeout);
     },
     //eslint-disable-next-line
-    [html, css, javascript]
+    [set]
   );
 
   return (

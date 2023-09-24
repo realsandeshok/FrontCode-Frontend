@@ -31,7 +31,9 @@ const CodeSnippetItem = (props) => {
                 />
               </div>
               <div className="px-2 cursor-pointer">
-                <EditIcon />
+                <Link to="/yourwork/64f73bbf6b21350fdb2b82ba">
+                  <EditIcon />
+                </Link>
               </div>
             </div>
           </div>

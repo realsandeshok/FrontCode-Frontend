@@ -4,7 +4,11 @@ import { useState } from "react";
 const CodeSnippetState = (props) => {
   const host = "http://localhost:5000";
   const codesnippetsInitial = [];
-
+  const [title, setTitle] = useState("Untitled");  
+  const [html, setHtml] = useState("");
+  const [css, setCss] = useState("");
+  const [id, setId] = useState("");
+  const [javascript, setJavascript] = useState("");
   const [codesnippets, setCodesnippets] = useState(codesnippetsInitial);
 
   // Get all Codesnippets
@@ -34,9 +38,8 @@ const CodeSnippetState = (props) => {
         "authentication-token":
           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
       },
-      body: JSON.stringify({ title, html, css, javascript }),
-    });
-
+      body: JSON.stringify({ title, html, css, javascript ,}),
+    });    
     const codesnippet = await response.json();
     setCodesnippets(codesnippets.concat(codesnippet));
   };
@@ -96,6 +99,10 @@ const CodeSnippetState = (props) => {
     <>
       <CodeContext.Provider
         value={{
+          html,setHtml,
+          css ,     setCss, 
+          javascript, setJavascript,
+          title, setTitle,
           codesnippets,
           addCodesnippet,
           deleteCodesnippet,
