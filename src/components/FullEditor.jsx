@@ -5,32 +5,30 @@ import CodeOffIcon from "@mui/icons-material/CodeOff";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { AppBar, Toolbar } from "@mui/material";
 import Button from "@mui/material/Button";
-import codeContext from "../context/codeContext";
-import Workspace from "./WorkSpace";
-import Result from "./Result";
-import DataProvider from "../context/DataProvider";
 import Editor from "./Editor";
 import CodeContext from "../context/codeContext";
 
 const FullEditor = () => {
   const context = useContext(CodeContext);
   // eslint-disable-next-line
-  const { addCodesnippet ,setTitle,title, html,setHtml, css,setCss, javascript,setJavascript} = context;
+  const {
+    addCodesnippet,
+    setTitle,
+    title,
+    html,
+    setHtml,
+    css,
+    setCss,
+    javascript,
+    setJavascript,
+  } = context;
 
   const [isTitle, setIsTitle] = useState("");
-  // const [title, setTitle] = useState("Untitled");
 
   const handleClick = () => {
     addCodesnippet(title, html, css, javascript);
-    console.log(title)      
-    console.log(html)      
-    // setTitle("")
   };
 
-  // Editor
-  // const [html, setHtml] = useState("");
-  // const [css, setCss] = useState("");
-  // const [javascript, setJavascript] = useState("");
   const [src, setSrc] = useState("");
   const srcCode = `
     <html>
@@ -49,7 +47,7 @@ const FullEditor = () => {
       return () => clearTimeout(timeout);
     },
     //eslint-disable-next-line
-    [set]
+    [setSrc]
   );
 
   return (

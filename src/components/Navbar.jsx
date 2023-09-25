@@ -1,9 +1,16 @@
 import React from "react";
 import { AppBar, Button, Stack, Toolbar } from "@mui/material";
 import CodeOffIcon from "@mui/icons-material/CodeOff";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar() {
+function Navbar(props) {
+  const { title } = props;
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
+
   return (
     <>
       <AppBar className="relative">
@@ -17,42 +24,57 @@ function Navbar() {
                 <span className=" pr-[2vw]">
                   <CodeOffIcon fontSize="large" />
                 </span>
-                FrontCode - Empowering Frontend Developers and Beginners
+                {title}
               </div>
-              <Stack
-                direction="row"
-                spacing={3}
-                style={{
-                  width: "21%",
-                }}
-              >
-                <Link to={"/login"} style={{ width: "100%" }}>
-                  <Button
-                    style={{
-                      backgroundColor: "#333333",
-                      fontWeight: "normal",
-                      fontSize: "15px",
-                    }}
-                    variant="contained"
-                    fullWidth
-                  >
-                    LOGIN
-                  </Button>
-                </Link>
-                <Link to={"/signup"} style={{ width: "100%" }}>
-                  <Button
-                    style={{
-                      backgroundColor: "#333333",
-                      fontWeight: "normal",
-                      fontSize: "15px",
-                    }}
-                    variant="contained"
-                    fullWidth
-                  >
-                    SIGN UP
-                  </Button>
-                </Link>
-              </Stack>
+              {!localStorage.getItem("token") ? (
+                <Stack
+                  direction="row"
+                  spacing={3}
+                  style={{
+                    width: "21%",
+                  }}
+                >
+                  <Link to={"/login"} style={{ width: "100%" }}>
+                    <Button
+                      style={{
+                        backgroundColor: "#333333",
+                        fontWeight: "normal",
+                        fontSize: "15px",
+                      }}
+                      variant="contained"
+                      fullWidth
+                    >
+                      LOGIN
+                    </Button>
+                  </Link>
+                  <Link to={"/signup"} style={{ width: "100%" }}>
+                    <Button
+                      style={{
+                        backgroundColor: "#333333",
+                        fontWeight: "normal",
+                        fontSize: "15px",
+                      }}
+                      variant="contained"
+                      fullWidth
+                    >
+                      SIGN UP
+                    </Button>
+                  </Link>
+                </Stack>
+              ) : (
+                <Button
+                  style={{
+                    backgroundColor: "#333333",
+                    fontWeight: "normal",
+                    fontSize: "15px",
+                  }}
+                  variant="contained"
+                  fullWidth
+                  onClick={handleLogout}
+                >
+                  LOGOUT
+                </Button>
+              )}
             </div>
           </div>
         </Toolbar>

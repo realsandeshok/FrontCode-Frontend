@@ -4,12 +4,12 @@ import { useState } from "react";
 const CodeSnippetState = (props) => {
   const host = "http://localhost:5000";
   const codesnippetsInitial = [];
-  const [title, setTitle] = useState("Untitled");  
+  const [title, setTitle] = useState("Untitled");
   const [html, setHtml] = useState("");
   const [css, setCss] = useState("");
-  const [id, setId] = useState("");
   const [javascript, setJavascript] = useState("");
   const [codesnippets, setCodesnippets] = useState(codesnippetsInitial);
+  const [gettingCodesnippet, setGetCodesnippet] = useState(codesnippetsInitial);
 
   // Get all Codesnippets
   const getCodesnippets = async (title) => {
@@ -18,8 +18,7 @@ const CodeSnippetState = (props) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "authentication-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
+        "authentication-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -35,13 +34,13 @@ const CodeSnippetState = (props) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "authentication-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
+        "authentication-token": localStorage.getItem("token"),
       },
-      body: JSON.stringify({ title, html, css, javascript ,}),
-    });    
+      body: JSON.stringify({ title, html, css, javascript }),
+    });
     const codesnippet = await response.json();
     setCodesnippets(codesnippets.concat(codesnippet));
+    return codesnippet;
   };
 
   // Delete
@@ -53,11 +52,11 @@ const CodeSnippetState = (props) => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
-          "authentication-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
+          "authentication-token": localStorage.getItem("token"),
         },
       }
     );
+    // eslint-disable-next-line
     const json = response.json();
     const newCode = codesnippets.filter((codesnippet) => {
       return codesnippet._id !== id;
@@ -71,11 +70,10 @@ const CodeSnippetState = (props) => {
     const response = await fetch(
       `${host}/api/codesnippet/updatecodesnippet/${id}`,
       {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "authentication-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRmNzNiYmY2YjIxMzUwZmRiMmI4MmJhIn0sImlhdCI6MTY5NDM0Njg0N30.5wotCFfWHire3bYHVxuzd3IorQEJU4MKVngu0Ed49fU",
+          "authentication-token": localStorage.getItem("token"),
         },
         body: JSON.stringify({ id, title, html, css, javascript }),
       }
@@ -95,19 +93,41 @@ const CodeSnippetState = (props) => {
     }
   };
 
+  // Get Particular codesnippet
+  const getCodesnippet = async (id) => {
+    // API call will be done here later.
+    const response = await fetch(`${host}/api/codesnippet/codesnippet/${id}`, {
+      method: "GET", // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    // console.log("data:", json);
+    setGetCodesnippet(json);
+    return json;
+  };
+
   return (
     <>
       <CodeContext.Provider
         value={{
-          html,setHtml,
-          css ,     setCss, 
-          javascript, setJavascript,
-          title, setTitle,
+          html,
+          setHtml,
+          css,
+          setCss,
+          javascript,
+          setJavascript,
+          title,
+          setTitle,
           codesnippets,
           addCodesnippet,
           deleteCodesnippet,
           editCodesnippet,
           getCodesnippets,
+          getCodesnippet,
+          gettingCodesnippet,
         }}
       >
         {props.children}

@@ -17,7 +17,6 @@ const CustomNavbar = () => {
 
   const handleClick = () => {
     addCodesnippet(title);
-    // setTitle("")
   };
   return (
     <div>
