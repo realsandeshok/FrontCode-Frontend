@@ -69,7 +69,6 @@ function Navbar(props) {
                     fontSize: "15px",
                   }}
                   variant="contained"
-                  fullWidth
                   onClick={handleLogout}
                 >
                   LOGOUT

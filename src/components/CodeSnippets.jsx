@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import codeContext from "../context/codeContext";
 import CodeSnippetItem from "./CodeSnippetItem";
 import { useEffect } from "react";
@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 const CodeSnippets = () => {
   const context = useContext(codeContext);
   const { codesnippets, getCodesnippets, addCodesnippet } = context;
+  // eslint-disable-next-line
+  const [title, setTitle] = useState("Untitled");
   const nav = useNavigate();
   const navigate = useNavigate();
 
@@ -35,7 +37,7 @@ const CodeSnippets = () => {
           color="primary"
           aria-label="add"
           onClick={async () => {
-            const snip = await addCodesnippet("Untitled", "", "", "");
+            const snip = await addCodesnippet(title, "", "", "");
             nav("/yourwork/editor/" + snip._id);
           }}
         >
